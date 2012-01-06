@@ -656,16 +656,17 @@
       var payload,
           api_utility;
       
-      api_utility = $('api_utility');      
+      api_utility = $('api_utility'); 
+           
       api_utility.getElement('button').addEvent('click', function(){
         
         try {
-          
-          eval("payload = "+$('api_payload').get('text'));
-          
+          var text = $('api_payload').get('value');
+          var payload = {}
+          eval("payload = "+text);
+          console.log(text);
         } catch(err){
-          console.warn("Could not evaluate payload object");
-          console.err(err);
+          console.warn('\n\nCould not evaluate payload object: ',err.message+'\n\n');
           payload = {}
         }
         
@@ -744,7 +745,7 @@
       <label>ACTION</label>
       <input type="text" id="api_action" value="sign_in">
       <label>PAYLOAD</label>
-      <textarea id="api_payload" onkeydown="return catchTab(this,event)">
+      <textarea id="api_payload"  onkeydown="return catchTab(this,event)">
 {
   test: true
 }
